@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:registration/Resources/Private/Language/locallang_db" date="2021-06-24T21:59:53Z" product-name="registration">
+		<header/>
+		<body>
+			<trans-unit id="tx_registration_domain_model_user" resname="tx_registration_domain_model_user">
+				<source>User</source>
+			</trans-unit>
+			<trans-unit id="tx_registration_domain_model_user.image" resname="tx_registration_domain_model_user.image">
+				<source>Image</source>
+			</trans-unit>
+			<trans-unit id="tx_registration_domain_model_user.birthday" resname="tx_registration_domain_model_user.birthday">
+				<source>Birthday</source>
+			</trans-unit>
+			<trans-unit id="fe_users.tx_extbase_type.Tx_Registration_User" resname="fe_users.tx_extbase_type.Tx_Registration_User">
+				<source>registration User</source>
+			</trans-unit>
+			<trans-unit id="tx_registration.tx_extbase_type" resname="tx_registration.tx_extbase_type">
+				<source>Record Type</source>
+			</trans-unit>
+			<trans-unit id="tx_registration_subscribe.name" resname="tx_registration_subscribe.name">
+				<source>Subscribe</source>
+			</trans-unit>
+			<trans-unit id="tx_registration_subscribe.description" resname="tx_registration_subscribe.description">
+				<source></source>
+			</trans-unit>
+			<trans-unit id="tx_registration_edit.name" resname="tx_registration_edit.name">
+				<source>Edit</source>
+			</trans-unit>
+			<trans-unit id="tx_registration_edit.description" resname="tx_registration_edit.description">
+				<source></source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

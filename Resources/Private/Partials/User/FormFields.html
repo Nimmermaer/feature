@@ -1,0 +1,10 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<label for="image">
+	<f:translate key="tx_registration_domain_model_user.image" /> <span class="required">(required)</span>
+</label><br />
+	<span>File upload is not implemented!</span><br  /><br />
+<label for="birthday">
+	<f:translate key="tx_registration_domain_model_user.birthday" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="birthday" id="birthday" value="{user.birthday->f:format.date()}" /><br />
+</html>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:registration/Resources/Private/Language/locallang_csh" date="2021-06-24T21:59:53Z" product-name="registration">
+		<header/>
+		<body>
+			<trans-unit id="image.description" resname="image.description">
+				<source>image</source>
+			</trans-unit>
+			<trans-unit id="birthday.description" resname="birthday.description">
+				<source>birthday</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
