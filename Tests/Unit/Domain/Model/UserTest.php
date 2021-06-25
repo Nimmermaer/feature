@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace Mblunck\Registration\Tests\Unit\Domain\Model;
 
+use Mblunck\Registration\Domain\Model\User;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use DateTime;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -13,14 +16,14 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class UserTest extends UnitTestCase
 {
     /**
-     * @var \Mblunck\Registration\Domain\Model\User
+     * @var User
      */
     protected $subject;
 
     protected function setUp()
     {
         parent::setUp();
-        $this->subject = new \Mblunck\Registration\Domain\Model\User();
+        $this->subject = new User();
     }
 
     protected function tearDown()
@@ -44,7 +47,7 @@ class UserTest extends UnitTestCase
      */
     public function setImageForFileReferenceSetsImage()
     {
-        $fileReferenceFixture = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+        $fileReferenceFixture = new FileReference();
         $this->subject->setImage($fileReferenceFixture);
 
         self::assertAttributeEquals(
@@ -70,7 +73,7 @@ class UserTest extends UnitTestCase
      */
     public function setBirthdayForDateTimeSetsBirthday()
     {
-        $dateTimeFixture = new \DateTime();
+        $dateTimeFixture = new DateTime();
         $this->subject->setBirthday($dateTimeFixture);
 
         self::assertAttributeEquals(

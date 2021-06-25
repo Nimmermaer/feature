@@ -1,13 +1,14 @@
 <?php
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 defined('TYPO3_MODE') || die();
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     'Registration',
     'Subscribe',
     'Subscribe'
 );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     'Registration',
     'Edit',
     'Edit'

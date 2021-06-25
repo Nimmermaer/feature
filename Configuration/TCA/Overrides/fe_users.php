@@ -1,4 +1,6 @@
 <?php
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Resource\File;
 defined('TYPO3_MODE') || die();
 
 if (!isset($GLOBALS['TCA']['fe_users']['ctrl']['type'])) {
@@ -20,10 +22,10 @@ if (!isset($GLOBALS['TCA']['fe_users']['ctrl']['type'])) {
             'maxitems' => 1,
         ]
     ];
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $tempColumnstx_registration_fe_users);
+    ExtensionManagementUtility::addTCAcolumns('fe_users', $tempColumnstx_registration_fe_users);
 }
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+ExtensionManagementUtility::addToAllTCAtypes(
     'fe_users',
     $GLOBALS['TCA']['fe_users']['ctrl']['type'],
     '',
@@ -36,7 +38,7 @@ $tmp_registration_columns = [
         'exclude' => true,
         'l10n_mode' => 'exclude',
         'label' => 'LLL:EXT:registration/Resources/Private/Language/locallang_db.xlf:tx_registration_domain_model_user.image',
-        'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+        'config' => ExtensionManagementUtility::getFileFieldTCAConfig(
             'image',
             [
                 'appearance' => [
@@ -48,27 +50,27 @@ $tmp_registration_columns = [
                         --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                         --palette--;;filePalette'
                     ],
-                    \TYPO3\CMS\Core\Resource\File::FILETYPE_TEXT => [
+                    File::FILETYPE_TEXT => [
                         'showitem' => '
                         --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                         --palette--;;filePalette'
                     ],
-                    \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                    File::FILETYPE_IMAGE => [
                         'showitem' => '
                         --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                         --palette--;;filePalette'
                     ],
-                    \TYPO3\CMS\Core\Resource\File::FILETYPE_AUDIO => [
+                    File::FILETYPE_AUDIO => [
                         'showitem' => '
                         --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                         --palette--;;filePalette'
                     ],
-                    \TYPO3\CMS\Core\Resource\File::FILETYPE_VIDEO => [
+                    File::FILETYPE_VIDEO => [
                         'showitem' => '
                         --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                         --palette--;;filePalette'
                     ],
-                    \TYPO3\CMS\Core\Resource\File::FILETYPE_APPLICATION => [
+                    File::FILETYPE_APPLICATION => [
                         'showitem' => '
                         --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                         --palette--;;filePalette'
@@ -102,7 +104,7 @@ $tmp_registration_columns = [
 
 ];
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users',$tmp_registration_columns);
+ExtensionManagementUtility::addTCAcolumns('fe_users',$tmp_registration_columns);
 
 // inherit and extend the show items from the parent class
 if (isset($GLOBALS['TCA']['fe_users']['types']['0']['showitem'])) {

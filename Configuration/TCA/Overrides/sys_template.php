@@ -1,4 +1,5 @@
 <?php
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 defined('TYPO3_MODE') || die();
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile('registration', 'Configuration/TypoScript', 'registration');
+ExtensionManagementUtility::addStaticFile('registration', 'Configuration/TypoScript', 'registration');

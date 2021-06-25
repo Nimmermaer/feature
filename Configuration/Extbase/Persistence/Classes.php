@@ -1,9 +1,11 @@
 <?php
 declare(strict_types = 1);
 
+use Mblunck\Registration\Domain\Model\User;
+
 return [
-    \Mblunck\Registration\Domain\Model\User::class => [
+    User::class => [
         'tableName' => 'fe_users',
-        
+
     ],
 ];

@@ -1,33 +1,39 @@
 <?php
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+use Mblunck\Registration\Controller\UserController;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Imaging\IconRegistry;
+use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
 defined('TYPO3_MODE') || die();
 
 call_user_func(static function() {
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Registration',
         'Subscribe',
         [
-            \Mblunck\Registration\Controller\UserController::class => 'subscribe'
+            UserController::class => 'subscribe'
         ],
         // non-cacheable actions
         [
-            \Mblunck\Registration\Controller\UserController::class => 'subscribe'
+            UserController::class => 'subscribe'
         ]
     );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'Registration',
         'Edit',
         [
-            \Mblunck\Registration\Controller\UserController::class => 'edit'
+            UserController::class => 'edit'
         ],
         // non-cacheable actions
         [
-            \Mblunck\Registration\Controller\UserController::class => 'edit'
+            UserController::class => 'edit'
         ]
     );
 
     // wizards
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
+    ExtensionManagementUtility::addPageTSConfig(
         'mod {
             wizards.newContentElement.wizardItems.plugins {
                 elements {
@@ -55,15 +61,15 @@ call_user_func(static function() {
        }'
     );
 
-    $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
+    $iconRegistry = GeneralUtility::makeInstance(IconRegistry::class);
     $iconRegistry->registerIcon(
         'registration-plugin-subscribe',
-        \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        SvgIconProvider::class,
         ['source' => 'EXT:registration/Resources/Public/Icons/user_plugin_subscribe.svg']
     );
     $iconRegistry->registerIcon(
         'registration-plugin-edit',
-        \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        SvgIconProvider::class,
         ['source' => 'EXT:registration/Resources/Public/Icons/user_plugin_edit.svg']
     );
 });
