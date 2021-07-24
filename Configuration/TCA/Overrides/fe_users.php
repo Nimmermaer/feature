@@ -6,8 +6,8 @@ defined('TYPO3_MODE') || die();
 if (!isset($GLOBALS['TCA']['fe_users']['ctrl']['type'])) {
     // no type field defined, so we define it here. This will only happen the first time the extension is installed!!
     $GLOBALS['TCA']['fe_users']['ctrl']['type'] = 'tx_extbase_type';
-    $tempColumnstx_registration_fe_users = [];
-    $tempColumnstx_registration_fe_users[$GLOBALS['TCA']['fe_users']['ctrl']['type']] = [
+    $tempColumnsTx_registration_fe_users = [];
+    $tempColumnsTx_registration_fe_users[$GLOBALS['TCA']['fe_users']['ctrl']['type']] = [
         'exclude' => true,
         'label' => 'LLL:EXT:registration/Resources/Private/Language/locallang_db.xlf:tx_registration.tx_extbase_type',
         'config' => [
@@ -22,7 +22,7 @@ if (!isset($GLOBALS['TCA']['fe_users']['ctrl']['type'])) {
             'maxitems' => 1,
         ]
     ];
-    ExtensionManagementUtility::addTCAcolumns('fe_users', $tempColumnstx_registration_fe_users);
+    ExtensionManagementUtility::addTCAcolumns('fe_users', $tempColumnsTx_registration_fe_users);
 }
 
 ExtensionManagementUtility::addToAllTCAtypes(
@@ -47,32 +47,32 @@ $tmp_registration_columns = [
                 'foreign_types' => [
                     '0' => [
                         'showitem' => '
-                        --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                        --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                         --palette--;;filePalette'
                     ],
                     File::FILETYPE_TEXT => [
                         'showitem' => '
-                        --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                        --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                         --palette--;;filePalette'
                     ],
                     File::FILETYPE_IMAGE => [
                         'showitem' => '
-                        --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                        --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                         --palette--;;filePalette'
                     ],
                     File::FILETYPE_AUDIO => [
                         'showitem' => '
-                        --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                        --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                         --palette--;;filePalette'
                     ],
                     File::FILETYPE_VIDEO => [
                         'showitem' => '
-                        --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                        --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                         --palette--;;filePalette'
                     ],
                     File::FILETYPE_APPLICATION => [
                         'showitem' => '
-                        --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                        --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
                         --palette--;;filePalette'
                     ]
                 ],
@@ -86,7 +86,7 @@ $tmp_registration_columns = [
             ],
             $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
         ),
-        
+
     ],
     'birthday' => [
         'exclude' => true,

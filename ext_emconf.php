@@ -10,14 +10,13 @@
  * "version" and "dependencies" must not be touched!
  ***************************************************************/
 
-$EM_CONF[$_EXTKEY] = [
+$EM_CONF['registration'] = [
     'title' => 'registration',
     'description' => '',
     'category' => 'plugin',
     'author' => 'Michael Blunck',
     'author_email' => 'mi.blunck@gmail',
     'state' => 'alpha',
-    'clearCacheOnLoad' => 0,
     'version' => '1.0.0',
     'constraints' => [
         'depends' => [

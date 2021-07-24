@@ -1,28 +1,66 @@
-plugin.tx_registration_subscribe {
-    view {
-        # cat=plugin.tx_registration_subscribe/file; type=string; label=Path to template root (FE)
-        templateRootPath = EXT:registration/Resources/Private/Templates/
-        # cat=plugin.tx_registration_subscribe/file; type=string; label=Path to template partials (FE)
-        partialRootPath = EXT:registration/Resources/Private/Partials/
-        # cat=plugin.tx_registration_subscribe/file; type=string; label=Path to template layouts (FE)
-        layoutRootPath = EXT:registration/Resources/Private/Layouts/
-    }
-    persistence {
-        # cat=plugin.tx_registration_subscribe//a; type=string; label=Default storage PID
-        storagePid =
-    }
+@import 'EXT:felogin/Configuration/TypoScript/setup.typoscript'
+styles.content.loginform {
+  pid = 0
+  recursive = 0
+
+  feloginBaseURL =
+  dateFormat = Y-m-d H:i
+
+  showForgotPassword = 1
+  showPermaLogin = 1
+  showLogoutFormAfterLogin = 1
+  emailFrom = blunck@iwkoeln.de
+  emailFromName = Blunck
+  replyToEmail = blunck@iwkoeln.de
+
+  email {
+    layoutRootPath =
+    templateRootPath = EXT:felogin/Resources/Private/Email/Templates/
+    partialRootPath =
+    templateName = PasswordRecovery
+  }
+
+  redirectMode =
+  redirectFirstMethod = 0
+  redirectPageLogin = 0
+  redirectPageLoginError = 0
+  redirectPageLogout = 0
+  redirectDisable = 0
+
+  forgotLinkHashValidTime = 12
+  newPasswordMinLength = 6
+  domains =
+  exposeNonexistentUserInForgotPasswordDialog = 0
 }
+
+plugin.tx_registration_subscribe {
+  view {
+    # cat=plugin.tx_registration_subscribe/file; type=string; label=Path to template root (FE)
+    templateRootPath = EXT:registration/Resources/Private/Templates/
+    # cat=plugin.tx_registration_subscribe/file; type=string; label=Path to template partials (FE)
+    partialRootPath = EXT:registration/Resources/Private/Partials/
+    # cat=plugin.tx_registration_subscribe/file; type=string; label=Path to template layouts (FE)
+    layoutRootPath = EXT:registration/Resources/Private/Layouts/
+  }
+
+  persistence {
+    # cat=plugin.tx_registration_subscribe//a; type=string; label=Default storage PID
+    storagePid =
+  }
+}
+
 plugin.tx_registration_edit {
-    view {
-        # cat=plugin.tx_registration_edit/file; type=string; label=Path to template root (FE)
-        templateRootPath = EXT:registration/Resources/Private/Templates/
-        # cat=plugin.tx_registration_edit/file; type=string; label=Path to template partials (FE)
-        partialRootPath = EXT:registration/Resources/Private/Partials/
-        # cat=plugin.tx_registration_edit/file; type=string; label=Path to template layouts (FE)
-        layoutRootPath = EXT:registration/Resources/Private/Layouts/
-    }
-    persistence {
-        # cat=plugin.tx_registration_edit//a; type=string; label=Default storage PID
-        storagePid =
-    }
+  view {
+    # cat=plugin.tx_registration_edit/file; type=string; label=Path to template root (FE)
+    templateRootPath = EXT:registration/Resources/Private/Templates/
+    # cat=plugin.tx_registration_edit/file; type=string; label=Path to template partials (FE)
+    partialRootPath = EXT:registration/Resources/Private/Partials/
+    # cat=plugin.tx_registration_edit/file; type=string; label=Path to template layouts (FE)
+    layoutRootPath = EXT:registration/Resources/Private/Layouts/
+  }
+
+  persistence {
+    # cat=plugin.tx_registration_edit//a; type=string; label=Default storage PID
+    storagePid =
+  }
 }

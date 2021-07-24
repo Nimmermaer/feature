@@ -13,5 +13,12 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 <f:section name="content">
     <h1>Template for subscribe action</h1>
+    <f:flashMessages />
+    <f:form action="create" name="newUser" object="{newUser}" enctype="multipart/form-data">
+        <f:render partial="User/FormFields" />
+        <f:form.submit value="Create new" />
+    </f:form>
+
 </f:section>
+
 </html>

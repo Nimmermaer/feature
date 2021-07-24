@@ -23,6 +23,12 @@ use DateTime;
 class User extends FrontendUser
 {
 
+
+    /**
+     * @var string
+     */
+    public string $check = '';
+
     /**
      * birthday
      *

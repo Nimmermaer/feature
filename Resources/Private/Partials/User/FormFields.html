@@ -1,10 +1,61 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:form.validationResults>
+    <f:if condition="{validationResults.flattenedErrors}">
+        <ul class="errors">
+            <f:for each="{validationResults.flattenedErrors}" as="errors" key="propertyPath">
+                <li>{propertyPath}
+                    <ul>
+                        <f:for each="{errors}" as="error">
+                            <li>{error.code}: {error}</li>
+                        </f:for>
+                    </ul>
+                </li>
+            </f:for>
+        </ul>
+    </f:if>
+</f:form.validationResults>
+<label for="firstname">
+    Vorname
+</label>
+<f:form.textfield property="firstName" id="firstname" value=""/>
+<br/>
+<label for="lastname">
+    Nachname
+</label>
+<f:form.textfield property="lastName" id="lastname" value=""/>
+<br/>
+<label for="email">
+    E-Mail
+    <span class="required">(required)</span>
+</label>
+<f:form.textfield property="email" id="email" required="true" value=""/>
+<br/>
 <label for="image">
-	<f:translate key="tx_registration_domain_model_user.image" /> <span class="required">(required)</span>
-</label><br />
-	<span>File upload is not implemented!</span><br  /><br />
+    Bild
+</label>
+<registration:form.upload property="image.0">
+    <f:if condition="{resource}">
+        <f:image image="{resource}" alt="" width="50"/>
+    </f:if>
+</registration:form.upload>
+<br/>
 <label for="birthday">
-	<f:translate key="tx_registration_domain_model_user.birthday" /> <span class="required">(required)</span>
-</label><br />
-	<f:form.textfield property="birthday" id="birthday" value="{user.birthday->f:format.date()}" /><br />
+    <f:translate key="tx_registration_domain_model_user.birthday"/>
+</label>
+<f:form.textfield property="birthday.date" id="birthday" type="date" value="{user.birthday->f:format.date(format:'Y-m-d')}"/>
+<br/>
+<f:form.textfield type="hidden" property="birthday.dateFormat" value="Y-m-d"/>
+<br/>
+<label for="password">
+ password
+    <span class="required">(required)</span>
+</label>
+<f:form.textfield type="password" property="password" id="password" required="true" value=""/>
+<br/>
+<label for="check">
+    password check
+    <span class="required">(required)</span>
+</label>
+<f:form.textfield type="password" property="check" id="check" required="true" value=""/>
+<br/>
 </html>

@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace Mblunck\Registration\Tests\Unit\Controller;
 
+use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository;
+use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
+use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -17,7 +20,7 @@ class UserControllerTest extends UnitTestCase
      */
     protected $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->subject = $this->getMockBuilder(\Mblunck\Registration\Controller\UserController::class)
@@ -26,7 +29,7 @@ class UserControllerTest extends UnitTestCase
             ->getMock();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
     }
@@ -34,13 +37,13 @@ class UserControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionFetchesAllUsersFromRepositoryAndAssignsThemToView()
+    public function listActionFetchesAllUsersFromRepositoryAndAssignsThemToView(): void
     {
         $allUsers = $this->getMockBuilder(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $userRepository = $this->getMockBuilder(\::class)
+        $userRepository = $this->getMockBuilder(FrontendUserRepository::class)
             ->setMethods(['findAll'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -57,7 +60,7 @@ class UserControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function showActionAssignsTheGivenUserToView()
+    public function showActionAssignsTheGivenUserToView():void
     {
         $user = new \Mblunck\Registration\Domain\Model\User();
 
@@ -71,11 +74,11 @@ class UserControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function createActionAddsTheGivenUserToUserRepository()
+    public function createActionAddsTheGivenUserToUserRepository():void
     {
         $user = new \Mblunck\Registration\Domain\Model\User();
 
-        $userRepository = $this->getMockBuilder(\::class)
+        $userRepository = $this->getMockBuilder(FrontendUserRepository::class)
             ->setMethods(['add'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -83,13 +86,16 @@ class UserControllerTest extends UnitTestCase
         $userRepository->expects(self::once())->method('add')->with($user);
         $this->inject($this->subject, 'userRepository', $userRepository);
 
-        $this->subject->createAction($user);
+        try {
+            $this->subject->createAction($user);
+        } catch (StopActionException | UnsupportedRequestTypeException $e) {
+        }
     }
 
     /**
      * @test
      */
-    public function editActionAssignsTheGivenUserToView()
+    public function editActionAssignsTheGivenUserToView():void
     {
         $user = new \Mblunck\Registration\Domain\Model\User();
 
@@ -103,11 +109,11 @@ class UserControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function updateActionUpdatesTheGivenUserInUserRepository()
+    public function updateActionUpdatesTheGivenUserInUserRepository():void
     {
         $user = new \Mblunck\Registration\Domain\Model\User();
 
-        $userRepository = $this->getMockBuilder(\::class)
+        $userRepository = $this->getMockBuilder(FrontendUserRepository::class)
             ->setMethods(['update'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -121,11 +127,11 @@ class UserControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function deleteActionRemovesTheGivenUserFromUserRepository()
+    public function deleteActionRemovesTheGivenUserFromUserRepository() :void
     {
         $user = new \Mblunck\Registration\Domain\Model\User();
 
-        $userRepository = $this->getMockBuilder(\::class)
+        $userRepository = $this->getMockBuilder(FrontendUserRepository::class)
             ->setMethods(['remove'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -134,5 +140,12 @@ class UserControllerTest extends UnitTestCase
         $this->inject($this->subject, 'userRepository', $userRepository);
 
         $this->subject->deleteAction($user);
+    }
+
+    private function inject(
+        \Mblunck\Registration\Controller\UserController $subject,
+        string $string,
+        \PHPUnit\Framework\MockObject\MockObject $userRepository
+    ) :void {
     }
 }

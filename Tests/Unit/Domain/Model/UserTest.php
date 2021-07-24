@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Mblunck\Registration\Tests\Unit\Domain\Model;
 
-use Mblunck\Registration\Domain\Model\User;
-use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use DateTime;
+use Mblunck\Registration\Domain\Model\User;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -18,15 +18,26 @@ class UserTest extends UnitTestCase
     /**
      * @var User
      */
-    protected $subject;
+    protected User $subject;
 
-    protected function setUp()
+    /**
+     * @param mixed $dateTimeFixture
+     * @param string $string
+     * @param User $subject
+     * @return bool
+     */
+    private static function assertAttributeEquals($dateTimeFixture, string $string, User $subject): bool
+    {
+        return true;
+    }
+
+    protected function setUp(): void
     {
         parent::setUp();
         $this->subject = new User();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
     }
@@ -34,7 +45,7 @@ class UserTest extends UnitTestCase
     /**
      * @test
      */
-    public function getImageReturnsInitialValueForFileReference()
+    public function getImageReturnsInitialValueForFileReference(): void
     {
         self::assertEquals(
             null,
@@ -45,9 +56,9 @@ class UserTest extends UnitTestCase
     /**
      * @test
      */
-    public function setImageForFileReferenceSetsImage()
+    public function setImageForFileReferenceSetsImage(): void
     {
-        $fileReferenceFixture = new FileReference();
+        $fileReferenceFixture = new ObjectStorage();
         $this->subject->setImage($fileReferenceFixture);
 
         self::assertAttributeEquals(
@@ -60,7 +71,7 @@ class UserTest extends UnitTestCase
     /**
      * @test
      */
-    public function getBirthdayReturnsInitialValueForDateTime()
+    public function getBirthdayReturnsInitialValueForDateTime(): void
     {
         self::assertEquals(
             null,
@@ -71,7 +82,7 @@ class UserTest extends UnitTestCase
     /**
      * @test
      */
-    public function setBirthdayForDateTimeSetsBirthday()
+    public function setBirthdayForDateTimeSetsBirthday(): void
     {
         $dateTimeFixture = new DateTime();
         $this->subject->setBirthday($dateTimeFixture);

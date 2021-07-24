@@ -13,3 +13,9 @@ ExtensionUtility::registerPlugin(
     'Edit',
     'Edit'
 );
+
+ExtensionUtility::registerPlugin(
+    'Registration',
+    'Login',
+    'Login'
+);
