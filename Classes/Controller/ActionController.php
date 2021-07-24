@@ -9,7 +9,6 @@ use Mblunck\Registration\Property\TypeConverter\UploadedFileReferenceConverter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Object\Container\Container;
-use TYPO3\CMS\Extbase\Property\PropertyMappingConfiguration;
 
 /**
  * Class ActionController

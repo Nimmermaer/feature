@@ -27,6 +27,10 @@ use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 use TYPO3\CMS\Extbase\Security\Exception\InvalidArgumentForHashGenerationException;
 use TYPO3\CMS\Extbase\Security\Exception\InvalidHashException;
 
+/**
+ * Class UploadedFileReferenceConverter
+ * @package Mblunck\Registration\Property\TypeConverter
+ */
 class UploadedFileReferenceConverter extends AbstractTypeConverter
 {
 

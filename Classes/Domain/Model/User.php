@@ -18,7 +18,8 @@ use DateTime;
  */
 
 /**
- * User
+ * Class User
+ * @package Mblunck\Registration\Domain\Model
  */
 class User extends FrontendUser
 {

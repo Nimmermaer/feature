@@ -5,9 +5,12 @@ namespace Mblunck\Registration\Domain\Validator;
 
 
 use Mblunck\Registration\Domain\Model\User;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 
+/**
+ * Class UserValidator
+ * @package Mblunck\Registration\Domain\Validator
+ */
 class UserValidator extends AbstractValidator
 {
 

@@ -5,6 +5,10 @@ namespace Mblunck\Registration\Domain\Model;
 
 use TYPO3\CMS\Core\Resource\ResourceInterface;
 
+/**
+ * Class FileReference
+ * @package Mblunck\Registration\Domain\Model
+ */
 class FileReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference
 {
     /**

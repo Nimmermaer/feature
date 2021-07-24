@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Mblunck\Registration\Controller;
 
 use Mblunck\Registration\Domain\Model\User;
-use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository;
-use TYPO3\CMS\FrontendLogin\Service\UserService;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
 /**
  * This file is part of the "registration" Extension for TYPO3 CMS.
@@ -27,7 +26,7 @@ class UserController extends ActionController
 {
 
     /**
-     * @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository
+     * @var FrontendUserRepository
      */
     private FrontendUserRepository $userRepository;
 
@@ -43,12 +42,9 @@ class UserController extends ActionController
 
     public function __construct()
     {
-        $userService = GeneralUtility::makeInstance(UserService::class);
-        $context = GeneralUtility::makeInstance(Context::class);
-        $this->userRepository = GeneralUtility::makeInstance(FrontendUserRepository::class,
-            $userService,
-            $context
-        );
+        $this->userRepository = (GeneralUtility::makeInstance(FrontendUserRepository::class) instanceof FrontendUserRepository) ?
+            GeneralUtility::makeInstance(FrontendUserRepository::class) :
+            null;
     }
 
     /**
@@ -63,10 +59,7 @@ class UserController extends ActionController
     }
 
     /**
-     * action show
-     *
      * @param User $user
-     * @return string|object|null|void
      */
     public function showAction(User $user)
     {
@@ -74,9 +67,7 @@ class UserController extends ActionController
     }
 
     /**
-     * action new
      *
-     * @return string|object|null|void
      */
     public function newAction()
     {
@@ -85,7 +76,7 @@ class UserController extends ActionController
     /**
      * @param User|null $newUser
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      */
     public function createAction(User $newUser = null): void
     {
@@ -93,16 +84,15 @@ class UserController extends ActionController
             '', AbstractMessage::WARNING);
         if ($newUser !== null) {
             $this->userRepository->add($newUser);
+            /** @var PersistenceManager $persistenceManager */
+            $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
+            $persistenceManager->persistAll();
         }
-        $this->redirect('edit', null, null, ['user', $newUser], 6);
+        $this->redirect('edit', null, null, ['user' => $newUser], 6);
     }
 
     /**
-     * action edit
-     *
      * @param User $user
-     * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("user")
-     * @return string|object|null|void
      */
     public function editAction(User $user)
     {
@@ -110,10 +100,10 @@ class UserController extends ActionController
     }
 
     /**
-     * action update
-     *
      * @param User $user
-     * @return string|object|null|void
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      */
     public function updateAction(User $user)
     {
@@ -124,10 +114,9 @@ class UserController extends ActionController
     }
 
     /**
-     * action delete
-     *
      * @param User $user
-     * @return string|object|null|void
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      */
     public function deleteAction(User $user)
     {

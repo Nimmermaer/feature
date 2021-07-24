@@ -3,7 +3,10 @@
 
 namespace Mblunck\Registration\Property\TypeConverter;
 
-
+/**
+ * Class ObjectStorageConverter
+ * @package Mblunck\Registration\Property\TypeConverter
+ */
 class ObjectStorageConverter extends \TYPO3\CMS\Extbase\Property\TypeConverter\ObjectStorageConverter
 {
     /**

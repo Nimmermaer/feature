@@ -21,6 +21,7 @@ $EM_CONF['registration'] = [
     'constraints' => [
         'depends' => [
             'typo3' => '10.4.0-10.4.99',
+            'felogin' => '10.4.0-10.4.99',
         ],
         'conflicts' => [],
         'suggests' => [],

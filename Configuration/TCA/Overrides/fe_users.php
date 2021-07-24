@@ -34,60 +34,6 @@ ExtensionManagementUtility::addToAllTCAtypes(
 
 $tmp_registration_columns = [
 
-    'image' => [
-        'exclude' => true,
-        'l10n_mode' => 'exclude',
-        'label' => 'LLL:EXT:registration/Resources/Private/Language/locallang_db.xlf:tx_registration_domain_model_user.image',
-        'config' => ExtensionManagementUtility::getFileFieldTCAConfig(
-            'image',
-            [
-                'appearance' => [
-                    'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference'
-                ],
-                'foreign_types' => [
-                    '0' => [
-                        'showitem' => '
-                        --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                        --palette--;;filePalette'
-                    ],
-                    File::FILETYPE_TEXT => [
-                        'showitem' => '
-                        --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                        --palette--;;filePalette'
-                    ],
-                    File::FILETYPE_IMAGE => [
-                        'showitem' => '
-                        --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                        --palette--;;filePalette'
-                    ],
-                    File::FILETYPE_AUDIO => [
-                        'showitem' => '
-                        --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                        --palette--;;filePalette'
-                    ],
-                    File::FILETYPE_VIDEO => [
-                        'showitem' => '
-                        --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                        --palette--;;filePalette'
-                    ],
-                    File::FILETYPE_APPLICATION => [
-                        'showitem' => '
-                        --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                        --palette--;;filePalette'
-                    ]
-                ],
-                'foreign_match_fields' => [
-                    'fieldname' => 'image',
-                    'tablenames' => 'fe_users',
-                    'table_local' => 'sys_file',
-                ],
-                'maxitems' => 1,
-                'minitems' => 1
-            ],
-            $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-        ),
-
-    ],
     'birthday' => [
         'exclude' => true,
         'l10n_mode' => 'exclude',
@@ -117,7 +63,7 @@ if (isset($GLOBALS['TCA']['fe_users']['types']['0']['showitem'])) {
     $GLOBALS['TCA']['fe_users']['types']['Tx_Registration_User']['showitem'] = '';
 }
 $GLOBALS['TCA']['fe_users']['types']['Tx_Registration_User']['showitem'] .= ',--div--;LLL:EXT:registration/Resources/Private/Language/locallang_db.xlf:tx_registration_domain_model_user,';
-$GLOBALS['TCA']['fe_users']['types']['Tx_Registration_User']['showitem'] .= 'image, birthday';
+$GLOBALS['TCA']['fe_users']['types']['Tx_Registration_User']['showitem'] .= 'birthday';
 
 $GLOBALS['TCA']['fe_users']['columns'][$GLOBALS['TCA']['fe_users']['ctrl']['type']]['config']['items'][] = [
     'LLL:EXT:registration/Resources/Private/Language/locallang_db.xlf:fe_users.tx_extbase_type.Tx_Registration_User',

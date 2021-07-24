@@ -10,6 +10,9 @@ namespace Mblunck\Registration\Controller;
 class LoginController extends ActionController
 {
 
+    /**
+     *
+     */
     public function showAction() :void
     {
       $this->view->assignMultiple([

@@ -49,41 +49,15 @@ plugin.tx_registration_edit {
     }
 }
 
-# these classes are only used in auto-generated templates
-plugin.tx_registration._CSS_DEFAULT_STYLE (
-    textarea.f3-form-error {
-        background-color:#FF9F9F;
-        border: 1px #FF0000 solid;
+plugin {
+  tx_felogin_login  {
+    view {
+      templateRootPaths.1627161443 = EXT:registration/Resources/Private/Templates/Extension/FeLogin
+      partialRootPaths.1627161443 = EXT:registration/Resources/Private/Partials/Extension/FeLogin
+      layoutRootPaths.1627161443 = EXT:registration/Resources/Private/Layouts/Extension/FeLogin
     }
-
-    input.f3-form-error {
-        background-color:#FF9F9F;
-        border: 1px #FF0000 solid;
-    }
-
-    .tx-registration table {
-        border-collapse:separate;
-        border-spacing:10px;
-    }
-
-    .tx-registration table th {
-        font-weight:bold;
-    }
-
-    .tx-registration table td {
-        vertical-align:top;
-    }
-
-    .typo3-messages .message-error {
-        color:red;
-    }
-
-    .typo3-messages .message-ok {
-        color:green;
-    }
-)
-
-
+  }
+}
 lib.login < .tt_content.felogin_login.20
 lib.login {
   settings {

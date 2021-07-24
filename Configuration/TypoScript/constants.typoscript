@@ -1,4 +1,4 @@
-@import 'EXT:felogin/Configuration/TypoScript/setup.typoscript'
+@import 'EXT:felogin/Configuration/TypoScript/constants.typoscript'
 styles.content.loginform {
   pid = 0
   recursive = 0
