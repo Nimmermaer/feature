@@ -1,0 +1,10 @@
+services:
+	errorFormatter.fileoutput:
+		factory: noximo\FileOutput(./ext_registration/phpstan.html, null)
+parameters:
+	level: max
+
+	paths:
+		- .
+		- Tests
+

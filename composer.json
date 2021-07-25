@@ -42,6 +42,11 @@
         "typo3/cms": {
             "web-dir": ".Build/public",
             "extension-key": "registration"
-        }
+        },
+		"phpstan": {
+			"includes": [
+				"phpstan.neon"
+			]
+		}
     }
 }
