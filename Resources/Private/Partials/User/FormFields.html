@@ -14,23 +14,23 @@
         </ul>
     </f:if>
 </f:form.validationResults>
-<label for="firstname">
+<label for="firstname" class="form-label">
     Vorname
 </label>
-<f:form.textfield property="firstName" id="firstname" value=""/>
+<f:form.textfield class="form-control" property="firstName" id="firstname" value=""/>
 <br/>
-<label for="lastname">
+<label for="lastname" class="form-label">
     Nachname
 </label>
-<f:form.textfield property="lastName" id="lastname" value=""/>
+<f:form.textfield class="form-control" property="lastName" id="lastname" value=""/>
 <br/>
-<label for="email">
+<label for="email" class="form-label">
     E-Mail
     <span class="required">(required)</span>
 </label>
-<f:form.textfield property="email" id="email" required="true" value=""/>
+<f:form.textfield class="form-control" property="email" id="email" required="true" value=""/>
 <br/>
-<label for="image">
+<label for="image" class="form-label">
     Bild
 </label>
 <registration:form.upload property="image.0">
@@ -39,23 +39,24 @@
     </f:if>
 </registration:form.upload>
 <br/>
-<label for="birthday">
+<label for="birthday" class="form-label">
     <f:translate key="tx_registration_domain_model_user.birthday"/>
 </label>
-<f:form.textfield property="birthday.date" id="birthday" type="date" value="{user.birthday->f:format.date(format:'Y-m-d')}"/>
+<f:form.textfield class="form-control" property="birthday.date" id="birthday" type="date"
+                  value="{user.birthday->f:format.date(format:'Y-m-d')}"/>
 <br/>
-<f:form.textfield type="hidden" property="birthday.dateFormat" value="Y-m-d"/>
+<f:form.textfield class="form-control" type="hidden" property="birthday.dateFormat" value="Y-m-d"/>
 <br/>
-<label for="password">
- password
+<label for="password" class="form-label">
+    password
     <span class="required">(required)</span>
 </label>
-<f:form.textfield type="password" property="password" id="password" required="true" value=""/>
+<f:form.textfield class="form-control" type="password" property="password" id="password" required="true" value=""/>
 <br/>
-<label for="check">
+<label for="check" class="form-label">
     password check
     <span class="required">(required)</span>
 </label>
-<f:form.textfield type="password" property="check" id="check" required="true" value=""/>
+<f:form.textfield class="form-control" type="password" property="check" id="check" required="true" value=""/>
 <br/>
 </html>
