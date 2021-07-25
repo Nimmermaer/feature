@@ -8,6 +8,9 @@ use Mblunck\Registration\Domain\Model\User;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository;
+use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
+use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
+use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
 /**
@@ -26,9 +29,9 @@ class UserController extends ActionController
 {
 
     /**
-     * @var FrontendUserRepository
+     * @var FrontendUserRepository|null
      */
-    private FrontendUserRepository $userRepository;
+    private ?FrontendUserRepository $userRepository = null;
 
     protected function initializeCreateAction(): void
     {
@@ -48,11 +51,9 @@ class UserController extends ActionController
     }
 
     /**
-     * action list
      *
-     * @return string|object|null|void
      */
-    public function listAction()
+    public function listAction(): void
     {
         $users = $this->userRepository->findAll();
         $this->view->assign('users', $users);
@@ -61,7 +62,7 @@ class UserController extends ActionController
     /**
      * @param User $user
      */
-    public function showAction(User $user)
+    public function showAction(User $user): void
     {
         $this->view->assign('user', $user);
     }
@@ -69,20 +70,21 @@ class UserController extends ActionController
     /**
      *
      */
-    public function newAction()
+    public function newAction(): void
     {
     }
 
     /**
      * @param User|null $newUser
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws StopActionException
+     * @throws IllegalObjectTypeException
      */
     public function createAction(User $newUser = null): void
     {
         $this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/p/friendsoftypo3/extension-builder/master/en-us/User/Index.html',
             '', AbstractMessage::WARNING);
         if ($newUser !== null) {
+            $newUser->setUsername($newUser->getEmail());
             $this->userRepository->add($newUser);
             /** @var PersistenceManager $persistenceManager */
             $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
@@ -101,11 +103,11 @@ class UserController extends ActionController
 
     /**
      * @param User $user
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     * @throws StopActionException
+     * @throws IllegalObjectTypeException
+     * @throws UnknownObjectException
      */
-    public function updateAction(User $user)
+    public function updateAction(User $user): void
     {
         $this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/p/friendsoftypo3/extension-builder/master/en-us/User/Index.html',
             '', AbstractMessage::WARNING);
@@ -115,10 +117,10 @@ class UserController extends ActionController
 
     /**
      * @param User $user
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws StopActionException
+     * @throws IllegalObjectTypeException
      */
-    public function deleteAction(User $user)
+    public function deleteAction(User $user): void
     {
         $this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/p/friendsoftypo3/extension-builder/master/en-us/User/Index.html',
             '', AbstractMessage::WARNING);
@@ -131,7 +133,7 @@ class UserController extends ActionController
      *
      * @return string|object|null|void
      */
-    public function subscribeAction()
+    public function subscribeAction(): void
     {
     }
 }

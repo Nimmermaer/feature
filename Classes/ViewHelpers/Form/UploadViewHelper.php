@@ -19,30 +19,35 @@ class UploadViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\UploadViewHelpe
 {
     /**
      * @TYPO3\CMS\Extbase\Annotation\Inject
-     * @var \TYPO3\CMS\Extbase\Security\Cryptography\HashService
+     * @var HashService | null
      */
-    protected HashService $hashService;
+    protected ?HashService $hashService = null;
 
     /**
      * @TYPO3\CMS\Extbase\Annotation\Inject
-     * @var \TYPO3\CMS\Extbase\Property\PropertyMapper
+     * @var PropertyMapper| null
      */
-    protected PropertyMapper $propertyMapper;
+    protected ?PropertyMapper $propertyMapper = null;
 
     public function __construct()
     {
         parent::__construct();
-        $this->propertyMapper = GeneralUtility::makeInstance(PropertyMapper::class);
-        $this->hashService = GeneralUtility::makeInstance(HashService::class);
+        $this->propertyMapper = (GeneralUtility::makeInstance(PropertyMapper::class) instanceof PropertyMapper) ?
+            GeneralUtility::makeInstance(PropertyMapper::class) :
+            null;
+        $this->hashService =   $this->userRepository = (GeneralUtility::makeInstance(HashService::class) instanceof HashService) ?
+            GeneralUtility::makeInstance(HashService::class) :
+            null;
     }
 
     /**
      * Render the upload field including possible resource pointer
      *
      * @return string
+     * @throws Exception
      * @api
      */
-    public function render()
+    public function render(): string
     {
         $output = '';
 
