@@ -31,7 +31,7 @@ class UserController extends ActionController
     /**
      * @var FrontendUserRepository|null
      */
-    private ?FrontendUserRepository $userRepository = null;
+    private FrontendUserRepository $userRepository;
 
     protected function initializeCreateAction(): void
     {
@@ -43,11 +43,14 @@ class UserController extends ActionController
         $this->setTypeConverterConfigurationForImageUpload('user');
     }
 
+    protected function initializeUpdateAction(): void
+    {
+        $this->setTypeConverterConfigurationForImageUpload('user');
+    }
+
     public function __construct()
     {
-        $this->userRepository = (GeneralUtility::makeInstance(FrontendUserRepository::class) instanceof FrontendUserRepository) ?
-            GeneralUtility::makeInstance(FrontendUserRepository::class) :
-            null;
+        $this->userRepository = GeneralUtility::makeInstance(FrontendUserRepository::class) ;
     }
 
     /**
@@ -67,12 +70,7 @@ class UserController extends ActionController
         $this->view->assign('user', $user);
     }
 
-    /**
-     *
-     */
-    public function newAction(): void
-    {
-    }
+
 
     /**
      * @param User|null $newUser
@@ -90,6 +88,7 @@ class UserController extends ActionController
             $persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
             $persistenceManager->persistAll();
         }
+
         $this->redirect('edit', null, null, ['user' => $newUser], 6);
     }
 
@@ -98,6 +97,7 @@ class UserController extends ActionController
      */
     public function editAction(User $user)
     {
+        dd($user);
         $this->view->assign('user', $user);
     }
 

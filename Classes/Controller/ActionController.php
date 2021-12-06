@@ -9,6 +9,7 @@ use Mblunck\Registration\Property\TypeConverter\UploadedFileReferenceConverter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Object\Container\Container;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class ActionController
@@ -42,8 +43,13 @@ class ActionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             UploadedFileReferenceConverter::CONFIGURATION_UPLOAD_FOLDER => '1:/content/',
         ];
         $propertyMappingConfiguration = $this->arguments[$argumentName]->getPropertyMappingConfiguration();
-
         $propertyMappingConfiguration->forProperty('image.0')
+            ->setTypeConverterOptions(
+                UploadedFileReferenceConverter::class,
+                $uploadConfiguration
+            );
+
+        $propertyMappingConfiguration->forProperty('imageCollection.0')
             ->setTypeConverterOptions(
                 UploadedFileReferenceConverter::class,
                 $uploadConfiguration

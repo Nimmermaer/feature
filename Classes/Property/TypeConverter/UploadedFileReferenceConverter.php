@@ -58,39 +58,44 @@ class UploadedFileReferenceConverter extends AbstractTypeConverter
     /**
      * @var string
      */
-    protected string $defaultUploadFolder = '1:/user_upload/';
+    protected string $defaultUploadFolder = '1:/content/';
 
     /**
+     * The source types this converter can convert.
+     *
      * @var string[]
      */
-    protected array $sourceTypes = ['array'];
+    protected $sourceTypes = ['array', 'integer'];
 
     /**
+     * The target type this converter can convert to.
+     *
      * @var string
      */
-    protected string $targetType = FileReference::class;
+    protected $targetType = \Mblunck\Registration\Domain\Model\FileReference::class;
+
 
     /**
      * Take precedence over the available FileReferenceConverter
      *
      * @var int
      */
-    protected int $priority = 30;
+    protected $priority = 30;
 
     /**
-     * @var ResourceFactory|null
+     * @var ResourceFactory
      */
-    protected ?ResourceFactory $resourceFactory = null;
+    protected ResourceFactory $resourceFactory;
 
     /**
-     * @var HashService|null
+     * @var HashService
      */
-    protected ?HashService $hashService = null;
+    protected HashService $hashService;
 
     /**
-     * @var PersistenceManager|null
+     * @var PersistenceManager
      */
-    protected ?PersistenceManager $persistenceManager = null;
+    protected PersistenceManager $persistenceManager;
 
     /**
      * @var object[]
@@ -99,17 +104,11 @@ class UploadedFileReferenceConverter extends AbstractTypeConverter
 
     public function __construct()
     {
-        $this->resourceFactory = (GeneralUtility::makeInstance(ResourceFactory::class) instanceof ResourceFactory) ?
-            GeneralUtility::makeInstance(ResourceFactory::class) :
-            null;
+        $this->resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
 
-        $this->hashService = (GeneralUtility::makeInstance(HashService::class) instanceof HashService) ?
-            GeneralUtility::makeInstance(HashService::class) :
-            null;
+        $this->hashService = GeneralUtility::makeInstance(HashService::class);
 
-        $this->persistenceManager = (GeneralUtility::makeInstance(PersistenceManager::class) instanceof PersistenceManager) ?
-            GeneralUtility::makeInstance(PersistenceManager::class) :
-            null;
+        $this->persistenceManager = GeneralUtility::makeInstance(PersistenceManager::class);
     }
 
     /**
@@ -173,6 +172,7 @@ class UploadedFileReferenceConverter extends AbstractTypeConverter
             return new Error($e->getMessage(), $e->getCode());
         }
 
+
         $this->convertedResources[$source['tmp_name']] = $resource;
         return $resource;
     }
@@ -206,11 +206,9 @@ class UploadedFileReferenceConverter extends AbstractTypeConverter
 
         $uploadFolderId = $configuration->getConfigurationValue(UploadedFileReferenceConverter::class,
             (string)self::CONFIGURATION_UPLOAD_FOLDER) ?: $this->defaultUploadFolder;
-        if (class_exists('TYPO3\\CMS\\Core\\Resource\\DuplicationBehavior')) {
+        dd($uploadFolderId);
+        if (class_exists(DuplicationBehavior::class)) {
             $defaultConflictMode = DuplicationBehavior::RENAME;
-        } else {
-            // @deprecated since 7.6 will be removed once 6.2 support is removed
-            $defaultConflictMode = 'changeName';
         }
         $conflictMode = $configuration->getConfigurationValue(UploadedFileReferenceConverter::class,
             (string)self::CONFIGURATION_UPLOAD_CONFLICT_MODE) ?: $defaultConflictMode;
@@ -222,7 +220,6 @@ class UploadedFileReferenceConverter extends AbstractTypeConverter
             'file:') === false
             ? $this->hashService->validateAndStripHmac($uploadInfo['submittedFile']['resourcePointer'])
             : null;
-
         return $this->createFileReferenceFromFalFileObject($uploadedFile, (int)$resourcePointer);
     }
 
@@ -255,10 +252,10 @@ class UploadedFileReferenceConverter extends AbstractTypeConverter
     ): object {
         if ($resourcePointer === null) {
             /** @var  \Mblunck\Registration\Domain\Model\FileReference $fileReference */
-            $fileReference = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference');
+            $fileReference = $this->objectManager->get(\Mblunck\Registration\Domain\Model\FileReference::class);
         } else {
             $fileReference = $this->persistenceManager->getObjectByIdentifier($resourcePointer,
-                'TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference', false);
+                \Mblunck\Registration\Domain\Model\FileReference::class, false);
         }
 
         $fileReference->setOriginalResource($falFileReference);

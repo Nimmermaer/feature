@@ -11,12 +11,19 @@ use TYPO3\CMS\Core\Resource\ResourceInterface;
  */
 class FileReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference
 {
+
+    public string $type = '';
+    public string $tmp_name = '';
+    public string $error = '';
+    public string $size = '';
+    protected string $name = '';
+
     /**
      * Uid of a sys_file
      *
      * @var int|null
      */
-    protected int $originalFileIdentifier;
+    protected ?int $originalFileIdentifier = null;
 
     /**
      * @param ResourceInterface $originalResource
@@ -34,5 +41,21 @@ class FileReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference
         $this->originalResource = $originalResource;
         $this->originalFileIdentifier = $originalResource->getOriginalFile()->getUid();
         $this->uidLocal = $originalResource->getOriginalFile()->getUid();
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 }

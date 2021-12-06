@@ -10,6 +10,11 @@ return [
             User::class,
         ],
     ],
+    \TYPO3\CMS\Extbase\Domain\Model\FileReference::class => [
+        'subclasses' => [
+            \Mblunck\Registration\Domain\Model\FileReference::class,
+        ],
+    ],
     User::class => [
         'tableName' => 'fe_users',
         'recordType' => 'Tx_Registration_User',
@@ -18,6 +23,9 @@ return [
                 'fieldname' => 'birthday',
             ]
         ]
+    ],
+    \Mblunck\Registration\Domain\Model\FileReference::class => [
+        'tableName' => 'sys_file_reference',
     ],
 ];
 

@@ -35,7 +35,7 @@ class UploadViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\UploadViewHelpe
         $this->propertyMapper = (GeneralUtility::makeInstance(PropertyMapper::class) instanceof PropertyMapper) ?
             GeneralUtility::makeInstance(PropertyMapper::class) :
             null;
-        $this->hashService =   $this->userRepository = (GeneralUtility::makeInstance(HashService::class) instanceof HashService) ?
+        $this->hashService = $this->userRepository = (GeneralUtility::makeInstance(HashService::class) instanceof HashService) ?
             GeneralUtility::makeInstance(HashService::class) :
             null;
     }
